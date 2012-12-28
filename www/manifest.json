@@ -1,0 +1,10 @@
+{
+    "name": "Application",
+    "description": "Packaged app",
+    "version": "0.1",
+    "app": {
+        "background": {
+            "scripts": ["background.js"]
+        }
+    }
+}
