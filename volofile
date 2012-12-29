@@ -1,6 +1,8 @@
 /*jslint node: true */
 'use strict';
 
+var fs = require('fs');
+
 module.exports = {
     build: {
         flags: {
@@ -14,6 +16,24 @@ module.exports = {
 
             d.resolve(v.spawn('node', ['tools/r.js', '-o', 'tools/build.js'], {
                 useConsole: !namedArgs.quiet
+            }));
+        }
+    },
+    crx: {
+        depends : ['build'],
+        summary : 'creates .crx file to install your app locally',
+        run: function (d, v, namedArgs) {
+            var args = ['--pack-extension=www-built'];
+            if(v.exists('application.pem')) {
+                args.push('--pack-extension-key=application.pem');
+            }
+            d.resolve(v.spawn('google-chrome', args, {
+                useConsole: !namedArgs.quiet
+            }).then(function () {
+                v.mv('www-built.crx', 'application.crx');
+                if(!v.exists('application.pem')) {
+                    v.mv('www-built.pem', 'application.pem');
+                }
             }));
         }
     }
