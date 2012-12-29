@@ -18,6 +18,15 @@ That build command creates an optimized version of the project in a
 **www-built** directory. The js/app.js file will be optimized to include
 all of its dependencies.
 
+To build google chrome's `.crx` file, run:
+
+    volo crx
+
+This will. run "crx" command in volofile and create file `application.crx`. Also `application.pem` will be created first time, and used then.
+
+*NOTE: In Chrome 24 you can only install crx-extension by dragging it onto chrome://extension page from your desktop.*
+
+
 For more information on the optimizer:
 http://requirejs.org/docs/optimization.html
 
